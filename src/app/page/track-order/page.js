@@ -1,12 +1,25 @@
+import { BaseConfig } from "@/lib/config/base";
+import Ask from "@/lib/fetch/fetch";
 import BreadCrumbs from "@/ui/breadcrumbs/breadcrumbs";
 import PageCard from "@/ui/cards/page/page";
 import Image from "next/image";
 
-const TrackOrder = () => {
+const getData = async () => {
+  const data = await Ask(
+    `${BaseConfig.apiUrl}/official/page/track-order`,
+    "get",
+    "no-store"
+  );
+  return data;
+};
+
+const TrackOrder = async () => {
+  const data = await getData();
+
   return (
     <>
-      <BreadCrumbs items={[{ name: "پیگیری سفارش", active: true }]} />
-      <PageCard title="پیگیری سفارش" subtitle="پیگیری مرسوله های پستی">
+      <BreadCrumbs items={[{ name: data.name, active: true }]} />
+      <PageCard title={data.name} subtitle={data.subtitle}>
         <div className="flex items-center justify-between flex-wrap lg:flex-nowrap px-10">
           <Image
             src="/media/images/tracking-order.jpg"
@@ -14,12 +27,10 @@ const TrackOrder = () => {
             height={600}
           />
           <div className="mr-5">
-            <p className="font-iran font-normal text-justify">
-              با استفاده از این صفحه، می‌توانید وضعیت سفارش خود را به راحتی
-              پیگیری کنید. در این صفحه، اطلاعات جامعی از وضعیت فعلی سفارش شما
-              ارائه شده است، از جمله زمان تحویل پیش‌بینی شده و جزئیات ارسال.
-              برای هرگونه پرسش یا اطلاعات بیشتر، با تیم پشتیبانی ما تماس بگیرید.
-            </p>
+            <p
+              className="font-iran font-normal text-justify"
+              dangerouslySetInnerHTML={{ __html: data.description }}
+            />
             <div className="mt-5">
               <label className="text-gray-600 text-2xl font-normal">
                 شماره سفارش
@@ -34,6 +45,15 @@ const TrackOrder = () => {
       </PageCard>
     </>
   );
+};
+
+export const generateMetadata = async () => {
+  const data = await getData();
+  let meta = {
+    title: `${BaseConfig.appName} | ${data.name}`,
+  };
+
+  return meta;
 };
 
 export default TrackOrder;

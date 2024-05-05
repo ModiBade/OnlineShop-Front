@@ -1,8 +1,11 @@
 "use client"
 
 import { Tab } from "@headlessui/react"
+import ProductDescription from "./description/description"
+import ProductTechnicalAttributes from "./technical/technical"
+import ProductComments from "./comments/comments"
 
-const ProductTabs = () => {
+const ProductTabs = ({ data }) => {
 
     return (
         <Tab.Group>
@@ -11,9 +14,9 @@ const ProductTabs = () => {
                     {({ selected }) => (
                         <button
                             className={`transition ${selected
-                                    ? `bg-green-100 text-emerald-500`
-                                    : `bg-slate-100 text-slate-500`
-                                } px-4 py-1 text-sm ml-2 rounded-t-lg focus:outline-0`}
+                                ? `bg-green-100 text-emerald-500`
+                                : `bg-slate-100 text-slate-500`
+                                } px-4 py-1 text-sm ml-2 rounded-t-lg focus:outline-0 mt-1`}
                         >
                             توضیحات محصول
                         </button>
@@ -23,9 +26,9 @@ const ProductTabs = () => {
                     {({ selected }) => (
                         <button
                             className={`transition ${selected
-                                    ? `bg-green-100 text-emerald-500`
-                                    : `bg-slate-100 text-slate-500`
-                                } px-4 py-1 text-sm ml-2 rounded-t-lg focus:outline-0`}
+                                ? `bg-green-100 text-emerald-500`
+                                : `bg-slate-100 text-slate-500`
+                                } px-4 py-1 text-sm ml-2 rounded-t-lg focus:outline-0 mt-1`}
                         >
                             مشخصات فنی
                         </button>
@@ -35,19 +38,25 @@ const ProductTabs = () => {
                     {({ selected }) => (
                         <button
                             className={`transition ${selected
-                                    ? `bg-green-100 text-emerald-500`
-                                    : `bg-slate-100 text-slate-500`
-                                } px-4 py-1 text-sm ml-2 rounded-t-lg focus:outline-0`}
+                                ? `bg-green-100 text-emerald-500`
+                                : `bg-slate-100 text-slate-500`
+                                } px-4 py-1 text-sm ml-2 rounded-t-lg focus:outline-0 mt-1`}
                         >
-                            دیدگاه ها
+                            نظرات خریداران
                         </button>
                     )}
                 </Tab>
             </Tab.List>
-            <Tab.Panels className="mt-2">
-                <Tab.Panel></Tab.Panel>
-                <Tab.Panel></Tab.Panel>
-                <Tab.Panel></Tab.Panel>
+            <Tab.Panels className="mt-5">
+                <Tab.Panel>
+                    <ProductDescription description={data.description} />
+                </Tab.Panel>
+                <Tab.Panel>
+                    <ProductTechnicalAttributes attributes={data.attributes} />
+                </Tab.Panel>
+                <Tab.Panel>
+                    <ProductComments />
+                </Tab.Panel>
             </Tab.Panels>
         </Tab.Group>
     )

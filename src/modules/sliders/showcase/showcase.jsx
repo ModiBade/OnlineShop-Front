@@ -7,8 +7,9 @@ import 'swiper/scss/navigation';
 import Image from 'next/image';
 import SwiperCore from 'swiper';
 import { Autoplay } from "swiper/modules";
+import { BaseConfig } from '@/lib/config/base';
 
-const ShowcaseSlider = () => {
+const ShowcaseSlider = ({ data }) => {
 
     SwiperCore.use([Autoplay]);
 
@@ -26,12 +27,13 @@ const ShowcaseSlider = () => {
                 "disableOnInteraction": false
             }}
         >
-            <SwiperSlide>
-                <Image src="/media/images/392100.webp" width={1600} height={40} alt="logo" priority />
-            </SwiperSlide>
-            <SwiperSlide>
-                <Image src="/media/images/386421.webp" width={1600} height={40} alt="logo" priority />
-            </SwiperSlide>
+            {
+                data.map(data => (
+                    <SwiperSlide key={data.id}>
+                        <Image src={`${BaseConfig.baseUrl}/media/images/sliders/${data.image}`} width={1600} height={40} alt={data.title} priority />
+                    </SwiperSlide>
+                ))
+            }
         </Swiper>
     )
 

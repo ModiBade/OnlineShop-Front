@@ -25,25 +25,25 @@ const Main = () => {
         <div className="flex flex-col">
           <h2 className="text-slate-500">راهنمای خرید</h2>
           <Link
-            href="/submit-order"
+            href="/page/submit-order"
             className="transition font-vazir font-normal text-xs text-slate-500 my-2 hover:text-emerald-500"
           >
             ثبت سفارش
           </Link>
           <Link
-            href="/delivery"
+            href="/page/delivery"
             className="transition font-vazir font-normal text-xs text-slate-500 my-2 hover:text-emerald-500"
           >
             روند ارسال مرسوله ها
           </Link>
           <Link
-            href="/track-order"
+            href="/page/track-order"
             className="transition font-vazir font-normal text-xs text-slate-500 my-2 hover:text-emerald-500"
           >
             پیگیری سفارش
           </Link>
           <Link
-            href="/payment-guide"
+            href="/page/payment-guide"
             className="transition font-vazir font-normal text-xs text-slate-500 my-2 hover:text-emerald-500"
           >
             راهنمای پرداخت
@@ -54,25 +54,25 @@ const Main = () => {
         <div className="flex flex-col">
           <h2 className="text-slate-500">خدمات مشتریان</h2>
           <Link
-            href="faq"
+            href="/page/faq"
             className="transition font-vazir font-normal text-xs text-slate-500 my-2 hover:text-emerald-500"
           >
             سوالات متداول
           </Link>
           <Link
-            href="/return-goods"
+            href="/page/return-goods"
             className="transition font-vazir font-normal text-xs text-slate-500 my-2 hover:text-emerald-500"
           >
             مرجوعی کالا
           </Link>
           <Link
-            href="/terms"
+            href="/page/terms"
             className="transition font-vazir font-normal text-xs text-slate-500 my-2 hover:text-emerald-500"
           >
             شرایط استفاده
           </Link>
           <Link
-            href="/privacy"
+            href="/page/privacy"
             className="transition font-vazir font-normal text-xs text-slate-500 my-2 hover:text-emerald-500"
           >
             حریم خصوصی
@@ -83,25 +83,25 @@ const Main = () => {
         <div className="flex flex-col">
           <h2 className="text-slate-500">فروشگاه</h2>
           <Link
-            href="/about"
+            href="/page/about"
             className="transition font-vazir font-normal text-xs text-slate-500 my-2 hover:text-emerald-500"
           >
             درباره ما
           </Link>
           <Link
-            href="/contact"
+            href="/page/contact"
             className="transition font-vazir font-normal text-xs text-slate-500 my-2 hover:text-emerald-500"
           >
             تماس باما
           </Link>
           <Link
-            href="/collaboration"
+            href="/page/collaboration"
             className="transition font-vazir font-normal text-xs text-slate-500 my-2 hover:text-emerald-500"
           >
             همکاری باما
           </Link>
           <Link
-            href="/blog"
+            href="/page/blog"
             className="transition font-vazir font-normal text-xs text-slate-500 my-2 hover:text-emerald-500"
           >
             مجله

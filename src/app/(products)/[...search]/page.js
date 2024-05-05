@@ -1,7 +1,6 @@
 import ProductMini from "@/ui/cards/product/mini";
 import ProductsSidebar from "@/modules/products/sidebar/sidebar";
 import ProductsHeader from "@/modules/products/header/header";
-import { IoMdCodeDownload } from "react-icons/io";
 import LoadMoreProduct from "@/modules/products/loadmore/loadmore";
 
 const Search = () => {

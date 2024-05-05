@@ -1,48 +1,33 @@
+import { BaseConfig } from "@/lib/config/base";
 import Image from "next/image";
 
-const ProductGallery = () => {
+const ProductGallery = ({ alt, avatar, gallery }) => {
 
     return (
         <div className="flex flex-col items-center p-8">
-            <Image
-                src="/media/images/product-demo3.png"
-                width={300}
-                height={300}
-                alt="title"
-            />
+            <div className="h-fit overflow-hidden">
+                <Image
+                    src={avatar}
+                    width={300}
+                    height={300}
+                    alt={alt}
+                    className="transition hover:scale-125"
+                />
+            </div>
             <div className="flex items-center flex-wrap">
-                <Image
-                    src="/media/images/product-demo.png"
-                    width={70}
-                    height={70}
-                    alt="title"
-                    className="border p-1 ml-1 mt-1 rounded-md"
-                    loading="lazy"
-                />
-                <Image
-                    src="/media/images/product-demo2.png"
-                    width={70}
-                    height={70}
-                    alt="title"
-                    className="border p-1 ml-1 mt-1 rounded-md"
-                    loading="lazy"
-                />
-                <Image
-                    src="/media/images/product-demo3.png"
-                    width={70}
-                    height={70}
-                    alt="title"
-                    className="border p-1 ml-1 mt-1 rounded-md"
-                    loading="lazy"
-                />
-                <Image
-                    src="/media/images/product-demo4.png"
-                    width={70}
-                    height={70}
-                    alt="title"
-                    className="border p-1 ml-1 mt-1 rounded-md"
-                    loading="lazy"
-                />
+                {
+                    gallery.map(pic => (
+                        <Image
+                            key={pic.id}
+                            src={`${BaseConfig.baseUrl}/media/images/products/${pic.image.replace("*", "75")}`}
+                            width={70}
+                            height={70}
+                            alt={alt}
+                            className="border p-1 ml-1 mt-1 rounded-md"
+                            loading="lazy"
+                        />
+                    ))
+                }
             </div>
         </div>
     )

@@ -1,11 +1,29 @@
+"use client"
+
 import { numberFormat } from "@/lib/tools/utils";
 import Image from "next/image";
+import { useState } from "react";
 import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
 import { TbDiscount2 } from "react-icons/tb";
 
 const { BsBasket } = require("react-icons/bs")
 
-const AddProductToBasket = ({ type }) => {
+const AddProductToBasket = ({ type, ...data }) => {
+
+    const [quantity, setQuantity] = useState(1);
+
+    const handleQuantity = type => {
+        if (type === "plus") {
+            if (quantity !== data.quantity) {
+                setQuantity(prev => prev + 1);
+            }
+        } else {
+            if (quantity !== 1) {
+                setQuantity(prev => prev - 1);
+            }
+        }
+    }
+
     return (
         <>
             {
@@ -18,15 +36,11 @@ const AddProductToBasket = ({ type }) => {
             {
                 type === "full" &&
                 <>
-                    <div className="flex items-center justify-between mt-5 py-3 px-6">
-                        <div className="flex items-center bg-orange-100 text-orange-600 rounded-2xl px-2 py-2">
-                            <span className="text-[18px]">10</span>
-                            <TbDiscount2 className="text-xl" />
-                        </div>
+                    <div className="flex flex-row-reverse items-center justify-between mt-5 py-3 px-6">
                         <div>
                             <div className="flex">
                                 <span className="ml-1 text-3xl text-slate-600 line-through">
-                                    {numberFormat(25650000)}
+                                    {numberFormat(data.price)}
                                 </span>
                                 <span className="svg-sm svg-slate">
                                     <Image
@@ -39,7 +53,7 @@ const AddProductToBasket = ({ type }) => {
                             </div>
                             <div className="flex">
                                 <span className="ml-1 text-3xl text-emerald-600">
-                                    {numberFormat(22650000)}
+                                    {numberFormat(data.discountPrice)}
                                 </span>
                                 <span className="svg-sm svg-success">
                                     <Image
@@ -51,7 +65,27 @@ const AddProductToBasket = ({ type }) => {
                                 </span>
                             </div>
                         </div>
+                        <div className="flex items-center bg-orange-100 text-orange-600 rounded-2xl px-2 py-2">
+                            <span className="text-[18px]">{data.discount}</span>
+                            <TbDiscount2 className="text-xl" />
+                        </div>
                     </div>
+                    {/* <div className="flex items-center justify-between mt-5 py-3 px-6">
+                        <h2 className="text-2xl font-normal text-blue-500">قیمت</h2>
+                        <div className="flex">
+                            <span className="ml-1 text-3xl text-emerald-600">
+                                {numberFormat(data.discountPrice)}
+                            </span>
+                            <span className="svg-sm svg-success">
+                                <Image
+                                    src="/media/icons/svg/toman.svg"
+                                    width={25}
+                                    height={25}
+                                    alt="toman"
+                                />
+                            </span>
+                        </div>
+                    </div> */}
                     <hr className="border-dashed my-5" />
                     <div className="flex flex-col py-3 px-6">
                         <div className="flex items-center justify-between mb-5">
@@ -76,9 +110,9 @@ const AddProductToBasket = ({ type }) => {
                     <hr className="border-dashed my-5" />
                     <div className="flex items-center justify-between py-3 px-6">
                         <div className="flex items-center justify-between border border-gray-100 w-[5em] py-1 px-2 rounded-xl text-2xl">
-                            <button><CiSquarePlus className="text-gray-400" /></button>
-                            <span className="text-gray-600">1</span>
-                            <button><CiSquareMinus className="text-gray-400" /></button>
+                            <button onClick={() => handleQuantity("plus")}><CiSquarePlus className="text-gray-400" /></button>
+                            <span className="text-gray-600">{quantity}</span>
+                            <button onClick={() => handleQuantity("minus")}><CiSquareMinus className="text-gray-400" /></button>
                         </div>
                         <button className="flex transition bg-blue-100 hover:bg-sky-500 text-sky-600 hover:text-white px-3 py-2 rounded-lg">
                             <BsBasket className="text-lg" />

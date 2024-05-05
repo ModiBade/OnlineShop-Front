@@ -1,11 +1,11 @@
 import { IoIosArrowForward } from "react-icons/io";
 import { useSwiper } from "swiper/react";
 
-const NextButton = ({ color }) => {
+const NextButton = () => {
 
     const swiper = useSwiper();
 
-    return <button className={`text-${color} ml-4 text-2xl`} onClick={() => swiper.slideNext()}><IoIosArrowForward /></button>
+    return <button className={`ml-4 text-2xl`} onClick={() => swiper.slideNext()}><IoIosArrowForward /></button>
 
 }
 

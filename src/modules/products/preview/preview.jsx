@@ -12,8 +12,9 @@ import { MdDeliveryDining } from "react-icons/md";
 import ProductGallery from "../gallery/gallery";
 import ProductInfoBar from "../infoBar/infoBar";
 import ProductAttributes from "../attributes/attributes";
+import { BaseConfig } from "@/lib/config/base";
 
-const ProductPreview = () => {
+const ProductPreview = ({ data }) => {
 
     const [show, setShow] = useState(false);
 
@@ -23,36 +24,35 @@ const ProductPreview = () => {
                 <Modal.Body>
                     <div className="row">
                         <div className="relative col-12 md:col-6 lg:col-3 xl:col-3 border-l border-dashed">
-                            <ProductGallery />
+                            <ProductGallery alt={data.nameEn} avatar={`${BaseConfig.baseUrl}/media/images/products/${data.avatar.replace("*", "250")}`} gallery={data.gallery} />
                         </div>
                         <div className="col-12 md:col-6 lg:col-5 xl:col-5">
                             <div className="p-4">
                                 <div>
                                     <Image
-                                        src="/media/images/3352_bange_60x.png"
+                                        src={`${BaseConfig.baseUrl}/media/images/brands/${data.brand.avatar.replace("*", "75")}`}
                                         width={50}
                                         height={50}
-                                        alt="title"
+                                        alt={data.brand.nameEn}
                                         loading="lazy"
                                     />
                                 </div>
                                 <div className="mt-5">
                                     <h2 className="font-bakh font-normal mt-3 text-gray-600 text-xl">
-                                        گوشی موبایل شیائومی مدل Redmi 13C دو سیم کارت ظرفیت 256
-                                        گیگابایت و رم 8 گیگابایت
+                                        {data.nameFa}
                                     </h2>
                                     <h4 className="font-[calibri] text-slate-400 tracking-wide text-lg">
-                                        Xiaumi Redmi 13C - 8GB - 256GB Dual sim
+                                        {data.nameEn}
                                     </h4>
                                 </div>
                                 <hr className="border-dashed my-5" />
-                                <ProductInfoBar />
-                                <ProductAttributes />
+                                <ProductInfoBar unique={data.unique} category={data.category} />
+                                <ProductAttributes data={data.subAttributes} />
                             </div>
                         </div>
                         <div className="col-12 lg:col-4 xl:col-4 border-r border-dashed">
                             <div className="group relative">
-                                <AddProductToBasket type="full" />
+                                <AddProductToBasket type="full" price={data.price} discount={data.discountPercent} discountPrice={data.discountPrice} quantity={data.quantity} />
                                 <div className="flex items-center justify-between py-3 px-6">
                                     <div className="flex items-center bg-violet-100 text-violet-600 text-xs px-3 py-1 rounded-lg">
                                         <LuShieldCheck className="text-lg" />

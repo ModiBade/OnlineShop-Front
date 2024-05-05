@@ -1,3 +1,5 @@
+import { BaseConfig } from "@/lib/config/base";
+import Ask from "@/lib/fetch/fetch";
 import BreadCrumbs from "@/ui/breadcrumbs/breadcrumbs";
 import PageCard from "@/ui/cards/page/page";
 import Image from "next/image";
@@ -5,11 +7,22 @@ import { FaMapPin } from "react-icons/fa6";
 import { FaHeadphonesSimple } from "react-icons/fa6";
 import { HiOutlineEnvelopeOpen } from "react-icons/hi2";
 
-const Contact = () => {
+const getData = async () => {
+  const data = await Ask(
+    `${BaseConfig.apiUrl}/official/page/contact`,
+    "get",
+    "no-store"
+  );
+  return data;
+};
+
+const Contact = async () => {
+  const data = await getData();
+
   return (
     <>
-      <BreadCrumbs items={[{ name: "تماس باما", active: true }]} />
-      <PageCard title="تماس باما" subtitle="راه های ارتباطی باما">
+      <BreadCrumbs items={[{ name: data.name, active: true }]} />
+      <PageCard title={data.name} subtitle={data.subtitle}>
         <div className="flex items-center justify-between">
           <div className="flex items-center bg-green-100 text-emerald-600 rounded-xl px-3 py-2 w-[33%]">
             <FaMapPin className="text-4xl" />
@@ -48,12 +61,10 @@ const Contact = () => {
         <div className="flex items-center justify-between flex-wrap lg:flex-nowrap px-10 mt-5">
           <Image src="/media/images/contact-us.jpg" width={600} height={600} />
           <div className="mr-5">
-            <p className="font-iran font-normal text-justify">
-              خوشحالیم که از ارتباط با ما علاقه مند هستید. صفحه تماس ما راهی
-              ساده و موثر برای برقراری ارتباط مستقیم با تیم ماست. از انتقادات،
-              پیشنهادات، یا هرگونه سؤالی که در ذهن شما است، به ما بگویید. تیم ما
-              همواره آماده است تا به شما کمک کند و به سوالات شما پاسخ دهد.
-            </p>
+            <p
+              className="font-iran font-normal text-justify"
+              dangerouslySetInnerHTML={{ __html: data.description }}
+            />
             <form className="mt-5">
               <div className="flex items-center justify-between">
                 <div className="w-[49%]">
@@ -84,6 +95,17 @@ const Contact = () => {
       </PageCard>
     </>
   );
+};
+
+export const generateMetadata = async ({ params }) => {
+  const data = await getData(params);
+  let meta = {
+    title: `${BaseConfig.appName} | ${data.name}`,
+  };
+
+  return meta;
+
+  return meta;
 };
 
 export default Contact;

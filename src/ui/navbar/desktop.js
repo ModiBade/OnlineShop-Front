@@ -2,7 +2,6 @@ import { Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
-import { GoDot, GoDotFill } from "react-icons/go";
 import { HiMenuAlt3 } from "react-icons/hi";
 
 const DesktopNavbar = () => {
@@ -270,7 +269,7 @@ const DesktopNavbar = () => {
             پیشنهادات داغ
           </Link>
           <Link
-            href="/faq"
+            href="/page/faq"
             className="ml-4 text-sm font-bold font-bakh text-gray-600 border-b-4 border-transparent transition hover:border-pink-500 hover:text-pink-500"
           >
             سوالات متداول
@@ -282,7 +281,7 @@ const DesktopNavbar = () => {
             مجله
           </Link>
           <Link
-            href="/about"
+            href="/page/about"
             className="ml-4 text-sm font-bold font-bakh text-gray-600 border-b-4 border-transparent transition hover:border-pink-500 hover:text-pink-500"
           >
             درباره ما
@@ -290,7 +289,7 @@ const DesktopNavbar = () => {
         </div>
         <div>
           <Link
-            href="/contact"
+            href="/page/contact"
             className=" bg-slate-100 text-slate-700 px-3 py-2 rounded-t-lg"
           >
             ارتباط با ما
