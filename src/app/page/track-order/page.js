@@ -25,8 +25,9 @@ const TrackOrder = async () => {
             src="/media/images/tracking-order.jpg"
             width={600}
             height={600}
+            alt="track"
           />
-          <div className="mr-5">
+          <div className="mr-5 leading-8">
             <p
               className="font-iran font-normal text-justify"
               dangerouslySetInnerHTML={{ __html: data.description }}

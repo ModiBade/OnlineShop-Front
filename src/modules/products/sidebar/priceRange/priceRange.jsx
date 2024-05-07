@@ -2,17 +2,31 @@
 
 import { numberFormat } from '@/lib/tools/utils';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaMoneyBillTransfer } from 'react-icons/fa6';
-import RangeSlider from 'react-range-slider-input';
-import 'react-range-slider-input/dist/style.css';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
+import { useRouter, useSearchParams } from 'next/navigation';
 
-const PriceRange = () => {
+const PriceRange = ({ max, min }) => {
 
-    const [value, setValue] = useState([100, 1000])
+    const router = useRouter();
+    const searchParams = useSearchParams();
 
-    const handleOnChange = (e) => {
-        setValue(e)
+    const [value, setValue] = useState([min, max]);
+
+    const params = Object.fromEntries(searchParams);
+
+    useEffect(() => {
+        setValue([min, max]);
+    }, [min, max])
+
+    const handleOnChangeComplete = (e) => {
+        let query = { ...params };
+        query.price = `${e[0]}-${e[1]}`;
+
+        let queryString = JSON.stringify(query).replace(/}/g, '').replace(/{/g, '').replace(/,/g, '&').replace(/:/g, '=').replace(/"/g, '');
+        router.push(`?${queryString}`)
     }
 
     return (
@@ -21,19 +35,20 @@ const PriceRange = () => {
                 <FaMoneyBillTransfer className="text-xl text-gray-500" />
                 <h3 className="text-gray-500 mr-2">محدوده قیمت مورد نظر</h3>
             </div>
-            <RangeSlider
+            <Slider
                 className="dual-range-slider"
-                min={0}
-                max={1000}
+                range
+                allowCross={false}
+                min={min}
+                max={max}
                 value={value}
-                step={2}
-                orientation="horizontal"
-                onChange={handleOnChange}
-                onThumbDragStart={e => setMin(e)}
+                step={100000}
+                onChange={e => setValue(e)}
+                onChangeComplete={handleOnChangeComplete}
             />
             <div className="flex items-center justify-between mt-4">
                 <div className="flex bg-green-100 text-emerald-500 px-3 py-1 rounded-lg">
-                    <span className="ml-2">{numberFormat(0)}</span>
+                    <span className="ml-2">{numberFormat(value[1])}</span>
                     <Image
                         src="/media/icons/svg/toman.svg"
                         width={18}
@@ -42,7 +57,7 @@ const PriceRange = () => {
                     />
                 </div>
                 <div className="flex items-center bg-green-100 text-emerald-500 px-3 py-1 rounded-lg">
-                    <span className="ml-2">{numberFormat(30000000)}</span>
+                    <span className="ml-2">{numberFormat(value[0])}</span>
                     <Image
                         src="/media/icons/svg/toman.svg"
                         width={18}

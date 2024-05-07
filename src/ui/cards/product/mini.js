@@ -29,42 +29,61 @@ const ProductMini = ({ data }) => {
             {data.nameFa.substring(0, 65)}...
           </h2>
         </Link>
-        <div className="flex items-center justify-between mt-5">
-          <div className="flex items-center bg-orange-100 text-orange-600 rounded-2xl px-2 py-2">
-            <span className="text-[18px]">{data.discountPercent}</span>
-            <TbDiscount2 className="text-xl" />
-          </div>
-          <div>
+        {data.discountPrice === 0 ? (
+          <div className="flex items-center justify-between mt-10">
+            <h2 className="text-2xl font-normal text-blue-500">قیمت</h2>
             <div className="flex">
-              <span className="ml-1 text-lg text-slate-600 line-through">
+              <span className="ml-1 text-3xl text-emerald-600">
                 {numberFormat(data.price)}
               </span>
-              <Image
-                src="/media/icons/svg/toman-fade.svg"
-                width={18}
-                height={18}
-                alt="toman"
-              />
-            </div>
-            <div className="flex">
-              <span className="ml-1 text-lg text-emerald-600">
-                {numberFormat(data.discountPrice)}
+              <span className="svg-sm svg-success">
+                <Image
+                  src="/media/icons/svg/toman.svg"
+                  width={25}
+                  height={25}
+                  alt="toman"
+                />
               </span>
-              <Image
-                src="/media/icons/svg/toman.svg"
-                width={18}
-                height={18}
-                alt="toman"
-              />
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="flex items-center justify-between mt-5">
+            <div className="flex items-center bg-orange-100 text-orange-600 rounded-2xl px-2 py-2">
+              <span className="text-[18px]">{data.discountPercent}</span>
+              <TbDiscount2 className="text-xl" />
+            </div>
+            <div>
+              <div className="flex">
+                <span className="ml-1 text-lg text-slate-600 line-through">
+                  {numberFormat(data.price)}
+                </span>
+                <Image
+                  src="/media/icons/svg/toman-fade.svg"
+                  width={18}
+                  height={18}
+                  alt="toman"
+                />
+              </div>
+              <div className="flex">
+                <span className="ml-1 text-lg text-emerald-600">
+                  {numberFormat(data.discountPrice)}
+                </span>
+                <Image
+                  src="/media/icons/svg/toman.svg"
+                  width={18}
+                  height={18}
+                  alt="toman"
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
       <div className="flex items-center justify-between p-3">
         <AddProductToWishlist type="preview" />
         <AddProductToBasket type="preview" />
       </div>
-      <div className="transition bg-white rounded-r-lg absolute hidden group-hover:block top-0 left-0 bg-transparent flex flex-col px-3 py-4">
+      <div className="transition bg-white rounded-2xl absolute hidden group-hover:block top-0 left-0 bg-transparent flex flex-col px-3 py-4">
         <ProductPreview data={data} />
         <ProductsCompare />
       </div>

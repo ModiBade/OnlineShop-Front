@@ -21,7 +21,7 @@ const About = async ({ params }) => {
       <BreadCrumbs items={[{ name: data.name, active: true }]} />
       <PageCard title={data.name} subtitle={data.subtitle}>
         <p
-          className="font-iran font-normal text-justify"
+          className="font-iran font-normal text-justify leading-8"
           dangerouslySetInnerHTML={{ __html: data.description }}
         />
         {params.slug === "faq" && <Faqs data={data.questions} />}

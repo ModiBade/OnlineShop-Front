@@ -20,6 +20,18 @@
   .breadcrumbs {
     @apply flex items-center;
   }
+
+  .pagination {
+    @apply flex items-center;
+
+    .page {
+      @apply transition bg-violet-100 text-violet-500 hover:bg-violet-500 hover:text-white mx-1 px-4 py-2 rounded-xl;
+    }
+
+    .active {
+      @apply bg-violet-500 text-white;
+    }
+  }
 }
 
 @layer utilities {
@@ -196,16 +208,23 @@
 
   .dual-range-slider {
     background-color: #dcfce7 !important;
+  }
 
-    .range-slider__range {
-      height: 3px !important;
-      background-color: #10b981 !important;
-    }
+  .rc-slider {
+    height: 12px !important;
+    padding: 4px 0 !important;
 
-    .range-slider__thumb {
+    .rc-slider-handle {
       width: 18px !important;
       height: 18px !important;
-      background-color: #10b981 !important;
+      margin-top: -7px !important;
+      background-color: #43d19d !important;
+      border: solid 2px #328051 !important;
+    }
+
+    .rc-slider-track,
+    .rc-slider-tracks {
+      background-color: #0fa37a94 !important;
     }
   }
 }

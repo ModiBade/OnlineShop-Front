@@ -1,11 +1,12 @@
 import { BaseConfig } from "@/lib/config/base";
 import Ask from "@/lib/fetch/fetch";
+import Address from "@/ui/cards/page/contact/address";
+import Email from "@/ui/cards/page/contact/email";
+import WorkingHours from "@/ui/cards/page/contact/hours";
+import Phone from "@/ui/cards/page/contact/phone";
 import BreadCrumbs from "@/ui/breadcrumbs/breadcrumbs";
 import PageCard from "@/ui/cards/page/page";
 import Image from "next/image";
-import { FaMapPin } from "react-icons/fa6";
-import { FaHeadphonesSimple } from "react-icons/fa6";
-import { HiOutlineEnvelopeOpen } from "react-icons/hi2";
 
 const getData = async () => {
   const data = await Ask(
@@ -24,45 +25,21 @@ const Contact = async () => {
       <BreadCrumbs items={[{ name: data.name, active: true }]} />
       <PageCard title={data.name} subtitle={data.subtitle}>
         <div className="flex items-center justify-between">
-          <div className="flex items-center bg-green-100 text-emerald-600 rounded-xl px-3 py-2 w-[33%]">
-            <FaMapPin className="text-4xl" />
-            <div className="mr-3">
-              <div className="text-2xl font-normal">آدرس</div>
-              <div className="font-iran font-normal text-sm">
-                تهران، چهارراه عزیزخان، پاساژ اداری ایرانیان، پلاک 191، طبقه 4،
-                واحد 134
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center bg-pink-100 text-pink-600 rounded-xl px-3 py-2 w-[16.5%]">
-            <FaHeadphonesSimple className="text-4xl" />
-            <div className="mr-3">
-              <div className="text-2xl font-normal">تماس</div>
-              <div className="font-iran font-normal text-sm">021-91099012</div>
-            </div>
-          </div>
-          <div className="flex items-center bg-orange-100 text-orange-600 rounded-xl px-3 py-2 w-[16.5%]">
-            <HiOutlineEnvelopeOpen className="text-4xl" />
-            <div className="mr-3">
-              <div className="text-2xl font-normal">ایمیل</div>
-              <div className="font-iran font-normal text-sm">info@shop.com</div>
-            </div>
-          </div>
-          <div className="flex items-center bg-blue-100 text-blue-600 rounded-xl px-3 py-2 w-[33%]">
-            <FaMapPin className="text-4xl" />
-            <div className="mr-3">
-              <div className="text-2xl font-normal">ساعت کاری</div>
-              <div className="font-iran font-normal text-sm">
-                شنبه تا چهارشنبه : 10:00 - 17:00 پنجشنبه : 10:00 - 13:00
-              </div>
-            </div>
-          </div>
+          <Address />
+          <Phone />
+          <Email />
+          <WorkingHours />
         </div>
         <div className="flex items-center justify-between flex-wrap lg:flex-nowrap px-10 mt-5">
-          <Image src="/media/images/contact-us.jpg" width={600} height={600} />
+          <Image
+            src="/media/images/contact-us.jpg"
+            width={600}
+            height={600}
+            alt="contact"
+          />
           <div className="mr-5">
             <p
-              className="font-iran font-normal text-justify"
+              className="font-iran font-normal text-justify leading-8"
               dangerouslySetInnerHTML={{ __html: data.description }}
             />
             <form className="mt-5">

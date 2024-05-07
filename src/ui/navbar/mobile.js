@@ -3,9 +3,13 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { CgMenuGridO } from "react-icons/cg";
+import { TfiClose } from "react-icons/tfi";
+import MobileMenu from "./menu/mobile";
 
 const MobileNavbar = () => {
   const [mobileToggle, setMobileToggle] = useState(false);
+
+  const toggleCallback = () => setMobileToggle(false);
 
   return (
     <>
@@ -28,9 +32,9 @@ const MobileNavbar = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity z-10" />
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity z-[5]" />
           </Transition.Child>
-          <div className="fixed inset-0 overflow-hidden">
+          <div className="fixed inset-0 overflow-hidden z-[10]">
             <div className="absolute inset-0 overflow-hidden">
               <div className="pointer-events-none fixed inset-y-0 right-0 flex  pl-10">
                 <Transition.Child
@@ -42,7 +46,22 @@ const MobileNavbar = () => {
                   leaveFrom="translate-x-0"
                   leaveTo="translate-x-full"
                 >
-                  <Dialog.Panel className="pointer-events-auto relative h-screen w-screen max-w-[24rem]"></Dialog.Panel>
+                  <Dialog.Panel className="pointer-events-auto relative h-screen w-screen max-w-[24rem] bg-white">
+                    <div className="flex justify-between w-full pr-2 pt-4 sm:pr-2">
+                      <div className="font-bakh font-bold mr-[20px]">
+                        دنبال چه میگردی ؟
+                      </div>
+                      <button
+                        type="button"
+                        className="relative border-0 bg-transparent focus:outline-none ml-4"
+                        onClick={() => setMobileToggle(false)}
+                      >
+                        <TfiClose />
+                      </button>
+                    </div>
+                    <hr className="border-dashed my-3" />
+                    <MobileMenu callback={toggleCallback} />
+                  </Dialog.Panel>
                 </Transition.Child>
               </div>
             </div>

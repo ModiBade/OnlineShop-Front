@@ -1,14 +1,34 @@
+"use client"
+
+import Link from "next/link";
+import { useSearchParams } from 'next/navigation'
+
 const GeneralFilter = () => {
 
+    const searchParams = useSearchParams();
+    const params = Object.fromEntries(searchParams);
+
+    const handleDisplay = filter => {
+        let query = { ...params };
+        query.order = filter;
+        return query;
+    }
+
     return (
-        <div className="flex items-center mt-3 lg:mt-0 sm:mt-0 md:mt-3">
-            <span className="text-gray-700 text-xs font-iran font-normal">تعداد نمایش</span>
-            <ul className="flex items-center mr-3 font-iran font-normal text-xs">
-                <li className="cursor-pointer px-3 border-b-2 border-blue-500">9</li>
-                <li className="cursor-pointer px-3">18</li>
-                <li className="cursor-pointer px-3">36</li>
-            </ul>
-        </div>
+        <ul className="flex items-center font-iran font-normal text-xs">
+            <li className={`transition cursor-pointer px-4 py-2 ${params.order === "new" && `border-b-2 border-blue-500`} ${!params.order && `border-b-2 border-blue-500`}`}>
+                <Link href={{ query: handleDisplay("new") }}>جدیدترین</Link>
+            </li>
+            <li className={`transition cursor-pointer px-4 py-2 ${params.order === "cheap" && `border-b-2 border-blue-500`}`}>
+                <Link href={{ query: handleDisplay("cheap") }}>ارزان ترین</Link>
+            </li>
+            <li className={`transition cursor-pointer px-4 py-2 ${params.order === "exp" && `border-b-2 border-blue-500`}`}>
+                <Link href={{ query: handleDisplay("exp") }}>گران ترین</Link>
+            </li>
+            <li className={`transition cursor-pointer px-4 py-2 ${params.order === "seller" && `border-b-2 border-blue-500`}`}>
+                <Link href={{ query: handleDisplay("seller") }}>پرفروش ترین</Link>
+            </li>
+        </ul>
     )
 
 }

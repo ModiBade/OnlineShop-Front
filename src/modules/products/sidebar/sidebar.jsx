@@ -6,7 +6,7 @@ import PriceRange from "./priceRange/priceRange";
 import InStockFilter from "./switches/inStock";
 import SalesFilter from "./switches/sales";
 
-const ProductsSidebar = () => {
+const ProductsSidebar = ({ maxPrice, minPrice }) => {
 
     return (
         <div className="bg-white rounded-2xl p-5">
@@ -24,7 +24,7 @@ const ProductsSidebar = () => {
             <hr className="my-3 border-dashed" />
             <SizesFilter />
             <hr className="my-3 border-dashed" />
-            <PriceRange />
+            <PriceRange max={maxPrice} min={minPrice} />
             <hr className="my-3 border-dashed" />
             <InStockFilter />
             <SalesFilter />

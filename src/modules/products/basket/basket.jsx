@@ -36,56 +36,60 @@ const AddProductToBasket = ({ type, ...data }) => {
             {
                 type === "full" &&
                 <>
-                    <div className="flex flex-row-reverse items-center justify-between mt-5 py-3 px-6">
-                        <div>
-                            <div className="flex">
-                                <span className="ml-1 text-3xl text-slate-600 line-through">
-                                    {numberFormat(data.price)}
-                                </span>
-                                <span className="svg-sm svg-slate">
-                                    <Image
-                                        src="/media/icons/svg/toman-fade.svg"
-                                        width={25}
-                                        height={25}
-                                        alt="toman"
-                                    />
-                                </span>
+                    {
+                        data.discountPrice === 0 ?
+                            <div className="flex items-center justify-between mt-5 py-3 px-6">
+                                <h2 className="text-2xl font-normal text-blue-500">قیمت</h2>
+                                <div className="flex">
+                                    <span className="ml-1 text-3xl text-emerald-600">
+                                        {numberFormat(data.price)}
+                                    </span>
+                                    <span className="svg-sm svg-success">
+                                        <Image
+                                            src="/media/icons/svg/toman.svg"
+                                            width={25}
+                                            height={25}
+                                            alt="toman"
+                                        />
+                                    </span>
+                                </div>
                             </div>
-                            <div className="flex">
-                                <span className="ml-1 text-3xl text-emerald-600">
-                                    {numberFormat(data.discountPrice)}
-                                </span>
-                                <span className="svg-sm svg-success">
-                                    <Image
-                                        src="/media/icons/svg/toman.svg"
-                                        width={25}
-                                        height={25}
-                                        alt="toman"
-                                    />
-                                </span>
+                            :
+                            <div className="flex flex-row-reverse items-center justify-between mt-5 py-3 px-6">
+                                <div>
+                                    <div className="flex">
+                                        <span className="ml-1 text-3xl text-slate-600 line-through">
+                                            {numberFormat(data.price)}
+                                        </span>
+                                        <span className="svg-sm svg-slate">
+                                            <Image
+                                                src="/media/icons/svg/toman-fade.svg"
+                                                width={25}
+                                                height={25}
+                                                alt="toman"
+                                            />
+                                        </span>
+                                    </div>
+                                    <div className="flex">
+                                        <span className="ml-1 text-3xl text-emerald-600">
+                                            {numberFormat(data.discountPrice)}
+                                        </span>
+                                        <span className="svg-sm svg-success">
+                                            <Image
+                                                src="/media/icons/svg/toman.svg"
+                                                width={25}
+                                                height={25}
+                                                alt="toman"
+                                            />
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="flex items-center bg-orange-100 text-orange-600 rounded-2xl px-2 py-2">
+                                    <span className="text-[18px]">{data.discount}</span>
+                                    <TbDiscount2 className="text-xl" />
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex items-center bg-orange-100 text-orange-600 rounded-2xl px-2 py-2">
-                            <span className="text-[18px]">{data.discount}</span>
-                            <TbDiscount2 className="text-xl" />
-                        </div>
-                    </div>
-                    {/* <div className="flex items-center justify-between mt-5 py-3 px-6">
-                        <h2 className="text-2xl font-normal text-blue-500">قیمت</h2>
-                        <div className="flex">
-                            <span className="ml-1 text-3xl text-emerald-600">
-                                {numberFormat(data.discountPrice)}
-                            </span>
-                            <span className="svg-sm svg-success">
-                                <Image
-                                    src="/media/icons/svg/toman.svg"
-                                    width={25}
-                                    height={25}
-                                    alt="toman"
-                                />
-                            </span>
-                        </div>
-                    </div> */}
+                    }
                     <hr className="border-dashed my-5" />
                     <div className="flex flex-col py-3 px-6">
                         <div className="flex items-center justify-between mb-5">

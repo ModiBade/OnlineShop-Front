@@ -41,7 +41,7 @@ const ScrollToTop = () => {
             leaveTo="opacity-0"
         >
             <button onClick={goToTop} className="fixed bottom-5 left-10 z-[5] bg-violet-100 shadow-xl p-3 rounded-2xl animate-bounce">
-                <FaAnglesUp className="text-violet-700" />
+                <FaAnglesUp className="text-gray-500" />
             </button>
         </Transition>
     )

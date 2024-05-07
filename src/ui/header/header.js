@@ -1,5 +1,3 @@
-"use client";
-
 import DesktopSearch from "@/ui/header/layouts/search/desktop";
 import Profile from "@/ui/header/layouts/profile/profile";
 import Image from "next/image";
@@ -7,42 +5,22 @@ import Icons from "@/ui/header/layouts/icons/icons";
 import MobileSearch from "@/ui/header/layouts/search/mobile";
 import MobileNavbar from "../navbar/mobile";
 import DesktopNavbar from "../navbar/desktop";
-import { useEffect, useState } from "react";
+import Ask from "@/lib/fetch/fetch";
+import { BaseConfig } from "@/lib/config/base";
+import SetSettings from "@/modules/store/settings";
 
-const Header = () => {
-  // const [isFixed, setIsFixed] = useState(false);
+const getData = async () => {
+  const data = await Ask(`${BaseConfig.apiUrl}/header`, "get", "no-store");
+  return data;
+};
 
-  // useEffect(() => {
-  //   const fixer = () => {
-  //     const currentY = window.scrollY;
-  //     if (currentY > 200) {
-  //       setIsFixed(true);
-  //     } else {
-  //       setIsFixed(false);
-  //     }
-  //   };
-
-  //   setIsFixed(true);
-
-  //   window.addEventListener("scroll", fixer);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", fixer);
-  //   };
-  //   //eslint-disable-next-line
-  // }, []);
+const Header = async () => {
+  const data = await getData();
 
   return (
     <>
-      {/* <div className="text-center bg-pink-500 text-sm text-white font-vazir py-3">این یک اطلاعیه می باشد</div> */}
-      <div
-        // className={
-        //   isFixed
-        //     ? `transition fixed z-[10] w-full bg-white px-7 pt-4 pb-4 border-t-4 border-lime-500 shadow-md mb-5`
-        //     : `transition bg-white px-7 pt-4 pb-4 lg:pb-0 border-t-4 border-lime-500 shadow-md mb-5`
-        // }
-        className="transition bg-white px-7 pt-4 pb-4 lg:pb-0 border-t-4 border-lime-500 shadow-md mb-5"
-      >
+      <SetSettings data={data} />
+      <div className="transition bg-white px-7 pt-4 pb-4 lg:pb-0 border-t-4 border-lime-500 shadow-md mb-5">
         <div className="container mx-auto flex items-center justify-between">
           <MobileNavbar />
           <Image

@@ -1,7 +1,14 @@
-const { default: Image } = require("next/image");
-const { default: Link } = require("next/link");
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { useSelector } from "react-redux";
 
 const Main = () => {
+  const general = useSelector((state) => state.settings.general);
+
   return (
     <div className="container mx-auto row py-8 px-8 sm:flex-row">
       <div className="md:col-3 sm:col-6 md:pl-5 mt-4">
@@ -15,10 +22,13 @@ const Main = () => {
             height={40}
             alt="logo"
           />
-          <p className="leading-6	text-xs font-vazir text-slate-500 font-normal text-justify mt-3">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-            استفاده از طراحان گرافیک است.
-          </p>
+          {general ? (
+            <p className="leading-6	text-xs font-vazir text-slate-500 font-normal text-justify mt-3">
+              {general.about}
+            </p>
+          ) : (
+            <Skeleton height={5} width={250} />
+          )}
         </div>
       </div>
       <div className="md:col-3 sm:col-6 md:px-2 sm:pr-5 mt-4">
